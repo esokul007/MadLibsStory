@@ -1,3 +1,6 @@
 stanleyH -- 2024-10-29 2:24
 Updated design doc, clarified a few things and also added a couple new things
 Updated README
+
+stanleyH -- 2024-10-29 10:39
+Added team flag
