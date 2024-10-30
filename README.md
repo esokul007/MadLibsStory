@@ -12,23 +12,24 @@ Html templates, CSS, user accounts - Colyi (non existent person)
 This project is a collaborative storytelling website, allowing users to create and edit stories.
 
 ## Install guide: how to clone/install
+- Ensure that you have git installed on your computer, you you don't you can install it from here: (https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/installing-github-desktop)
 
 ## Launch codes: how to run
 - Open terminal or command prompt
 - Navigate to the cloned folder using command:
   ```cd path/to/folder```
-- Install the virtual enviorment using the command
+- Install the virtual enviorment using the command:
   ```python3 -m venv foo```
-- Activtae the virtual enviornment using the command
+- Activate the virtual environment using the command:
   ```. foo/bin/activate```
 - From venv, install required packages listed in requirements.txt:
 ```python
 pip install -r requirements.txt
 ```
-- Naviate to the app folder using the command
+- Naviate to the app folder using the command:
   ```cd app```
 - From app, run \_\_init\_\_.py:
 ```
 python3 __init__.py
 ```
-- Open the link in browser.
+- Open the link in browser to view the homepage
