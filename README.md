@@ -1,7 +1,8 @@
 # Stories by Indigo
 ---
-**Team Flag**:
+## Team Flag:
 ![](https://github.com/Stanleyhoo1/Indigo__stanleyh28_colyic_jacobl153_naomil49/blob/main/flag.jpg)
+---
 ## Roster:
 
 Storing and retrieving info from the databases – Stanley\
