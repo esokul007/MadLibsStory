@@ -7,3 +7,6 @@ Added team flag
 Added files
 Functional app
 Updated README
+
+stanleyH -- 2024-10-30 10:59
+Updated README, added more detailed instructions and description, added team flag to README
