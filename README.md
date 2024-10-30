@@ -9,7 +9,8 @@ Storing and retrieving info from the databases – Stanley\
 Python files to add, display, and webpages – Jacob/Naomi\
 Html templates, CSS, user accounts - Colyi (non existent person)
 
-This project is a collaborative storytelling website, allowing users to create and edit stories.
+## Description: 
+This project is a collaborative storytelling website, allowing users to create and edit stories. Users can only view the last edit of stories they haven't yet contributed to, once they have made changes to a story, they are no longer able to edit it and can view the full story.
 
 ## Install guide: how to clone/install
 - Ensure that you have git installed on your computer, you don't you can install it from here: https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/installing-github-desktop
