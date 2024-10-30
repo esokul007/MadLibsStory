@@ -18,7 +18,7 @@ This project is a collaborative storytelling website, allowing users to create a
 - Navigate to the cloned folder using command:
   ```cd path/to/folder```
 - Install the virtual enviorment using the command
-  ```python3 -m venv foo'''
+  ```python3 -m venv foo```
 - Activtae the virtual enviornment using the command
   ```. foo/bin/activate```
 - From venv, install required packages listed in requirements.txt:
