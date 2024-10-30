@@ -13,11 +13,12 @@ This project is a collaborative storytelling website, allowing users to create a
 
 ## Install guide: how to clone/install
 From venv, install required packages listed in requirements.txt:
-```
+```python
 pip install -r requirements.txt
 ```
 
 ## Launch codes: how to run
+- Navigate to the cloned folder
 From app, run \_\_init\_\_.py:
 ```
 python __init__.py
