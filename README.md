@@ -1,7 +1,7 @@
 # Stories by Indigo
 ---
 ## Team Flag:
-![](https://github.com/Stanleyhoo1/Indigo__stanleyh28_colyic_jacobl153_naomil49/blob/main/flag.webp)
+<img src="https://raw.githubusercontent.com/Stanleyhoo1/Indigo__stanleyh28_colyic_jacobl153_naomil49/main/flag.webp" width="200"></img>
 ---
 ## Roster:
 
