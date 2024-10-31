@@ -10,7 +10,7 @@ Python files to add, display, and webpages – Jacob/Naomi\
 Html templates, CSS, user accounts - Colyi (non existent person)
 
 ## Description: 
-This project is a collaborative storytelling website, allowing users to create and edit stories. Users can only view the last edit of stories they haven't yet contributed to, once they have made changes to a story, they are no longer able to edit it and can view the full story.
+This project is a collaborative storytelling website, allowing users to create and edit stories. Users must register in order to access the site. The homepage allows displays previously edited stories and created stories. The discovery page allows users to view all stories created by any author. When viewing a story, the user has the option to make changes to the story if they have not previously edited it. After editing, they may only view the full story and cannot edit. When creating a new story, users must add a title as well.
 
 ## Install guide: how to clone/install
 - Ensure that you have git installed on your computer, you don't you can install it from here: https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/installing-github-desktop
