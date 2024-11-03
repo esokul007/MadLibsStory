@@ -13,7 +13,7 @@ import os
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
-secret_key = os.urandom(24)
+secret_key = os.urandom(32)
 app.secret_key = os.environ.get('SECRET_KEY') or 'optional_default_key'
 
 @app.route('/register', methods=['GET', 'POST'])
