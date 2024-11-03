@@ -13,7 +13,7 @@ import os
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
-from database import *
+import database
 
 app = Flask(__name__)
 CORS(app)
