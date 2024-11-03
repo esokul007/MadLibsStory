@@ -1,0 +1,36 @@
+/* Style for the flash messages container */
+#flash-messages {
+    position: fixed;      
+    top: 20px;            
+    left: 50%;          
+    transform: translateX(-50%); 
+    z-index: 1000;     
+    width: auto;     
+    text-align: center; 
+}
+
+/* Style for individual flash messages */
+.flash-message {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f8d7da; 
+    color: #721c24; 
+}
+
+.flash-success {
+    background-color: #d4edda; 
+    color: #155724; 
+}
+
+.flash-message {
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hiding the message */
+.flash-message-hide {
+    opacity: 0;
+    visibility: hidden;
+}
