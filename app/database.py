@@ -93,7 +93,7 @@ def create_story():
                 if title in all_stories:
                     flash('Choose a different title, there is already a story with the same title!', 'error')
                 else:
-                    cur.execute("INSERT INTO stories (story_title), VALUES(?)", (title,))
+                    cur.execute("INSERT INTO stories (story_title) VALUES(?)", (title,))
                 conn.commit()
                 edit_story(user_id, title, edit)
                 flash('Creation successful! You can now view your story on your homepage!', 'success')
@@ -123,6 +123,7 @@ def create_edit():
                     story_title = result.fetchone()[0]
                     if story_title == title:
                         flash('You have already edited this story!', 'error')
+                        return redirect(url_for('home'))
                 
                 edit_story(user_id, title, edit)
                 flash('Edit succesful! You can now view the full story!', 'success')
@@ -142,7 +143,7 @@ def login():
             user_data = fetch_user_data(username)
             return redirect(url_for('home'))
     
-    return render_template('SmartWordle.html')
+    return redirect(url_for('home'))
 
 @app.route('/logout')
 def logout():
