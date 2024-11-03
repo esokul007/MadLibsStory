@@ -3,12 +3,20 @@
 # SoftDev
 # P00: Move Slowly and Fix Things
 # 2024-10-28
-# Time spent: XXXXXXX
+# Time spent: 5
 
-from flask import Flask, request, render_template, make_response, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for, flash, session
+from flask_cors import CORS
+import numpy as np
+import sqlite3
 import os
+from werkzeug.security import generate_password_hash, check_password_hash
+import json
+
+from database import *
 
 app = Flask(__name__)
+CORS(app)
 
 # Home route
 @app.route('/')

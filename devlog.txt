@@ -11,3 +11,8 @@ Updated README
 stanleyH -- 2024-10-30 10:59
 Updated README, added more detailed instructions and description, added team flag to README
 From the external README review, we realized that our instructions were not specific enough; we had assumed they had prior knowledge and would know how to install the repo themselves. We updated the README to make it such that even beginners will be able to install and user our app
+
+stanleyH -- 2024-10-30 10:59
+Wrote functions for storing data for stories in database.py, wrote functions to allow users to login and logout
+Updated requirement.txt for most up-to-date packages
+Changed imports for __init__.py
