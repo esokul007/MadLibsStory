@@ -1,12 +1,12 @@
 /* Style for the flash messages container */
 #flash-messages {
-    position: fixed;      
-    top: 20px;            
-    left: 50%;          
-    transform: translateX(-50%); 
-    z-index: 1000;     
-    width: auto;     
-    text-align: center; 
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: auto;
+    text-align: center;
 }
 
 /* Style for individual flash messages */
@@ -14,13 +14,13 @@
     padding: 10px 20px;
     margin-bottom: 10px;
     border-radius: 5px;
-    background-color: #f8d7da; 
-    color: #721c24; 
+    background-color: #f8d7da;
+    color: #721c24;
 }
 
 .flash-success {
-    background-color: #d4edda; 
-    color: #155724; 
+    background-color: #d4edda;
+    color: #155724;
 }
 
 .flash-message {
@@ -48,7 +48,51 @@
     text-align: left;
   }
 
-  .log_in_box {
-    text-align: right;
+  /* Container for the form elements */
+  .login-form {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 200px;
+  }
 
+  /* Container for buttons */
+  .button-container {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      gap: 10px;
+  }
+
+  /* General style for buttons */
+  .login-form button {
+      flex: 1;
+      padding: 8px 16px;
+      border-radius: 20px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 0;
+  }
+
+  /* Specific style for the login button */
+  .login-btn {
+      background-color: #007bff;
+  }
+
+  .login-btn:hover {
+      background-color: #0056b3;
+  }
+
+  /* Specific style for the signup button */
+  .signup-btn {
+      background-color: #4CAF50;
+  }
+
+  .signup-btn:hover {
+      background-color: #45a049;
   }

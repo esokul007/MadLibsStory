@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <div class="login-container">
+        <form class="login-form" action="/login" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <div class="button-container">
+                <button type="submit" class="login-btn">Login</button>
+                <a href="{{ url_for('register') }}" class="signup-btn-link"><button type="button" class="signup-btn">Sign Up</button></a>
+            </div>
+        </form>
+    </div>
     <h1> Hello, {{ username }}. </h1>
 
     <h2> Create story:</h2>
