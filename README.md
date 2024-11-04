@@ -18,6 +18,7 @@ This project is a collaborative storytelling website, allowing users to create a
 - Once you set up your ssh key, you are ready to clone the repository! First, open terminal or command prompt
 - Navigate to the directory where you want to clone this repository
 - You can clone it now by running the following command:
+
   ```git clone git@github.com:Stanleyhoo1/Indigo__stanleyh28_colyic_jacobl153_naomil49.git```
 - You can now run our code! See the next section on how to run our app
 
