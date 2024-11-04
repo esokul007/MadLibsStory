@@ -34,3 +34,21 @@
     opacity: 0;
     visibility: hidden;
 }
+
+.upper_box {
+    position: sticky;
+    padding: 10px 16px;
+    background: #5555;
+    color: #f1f1f1;
+
+
+}
+
+.header {
+    text-align: left;
+  }
+
+  .log_in_box {
+    text-align: right;
+
+  }

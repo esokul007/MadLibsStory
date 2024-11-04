@@ -20,3 +20,7 @@ Changed imports for __init__.py
 naomiL -- 2024-11-4 12:52
 Routing for home, login, register, and logouts
 Templates for above and create story
+
+jacobL -- 2024-11-4 7:45
+All form actions work correctly now, but create story.
+Started CSS for Log in page. Much work to be done with styling.

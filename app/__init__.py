@@ -9,7 +9,7 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for, f
 from flask_cors import CORS
 import numpy as np
 import sqlite3
-import os
+import os 
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 

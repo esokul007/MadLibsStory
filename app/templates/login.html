@@ -8,25 +8,34 @@
 <html>
   <head>
     <title> LOGIN </title>
+    <link rel="stylesheet" href="../static/style.css">
   </head>
 
   <body>
-    <h1> Stories by Indigo </h1>
-    Log in to access stories. Register to create new account. <br><br>
-    <form action="/login" method="POST">
-        Username: <input type="text" name="username">
+    <div class = "upper_box">
+    
+      <div class = "header" id="my_heading">
+        <h1> Stories by Indigo </h1>
+        </div>
+  
+        <div class="log_in_box" id ="log">
+          Log in to access stories. Register to create new account. <br><br>
+          <form action="/" method="GET">
+            Username: <input type="text" name="username">
+            <br><br>
+            Password: <input type="password" name="password">
+            <br><br>
+            <input type="submit" value="Log in">
+        </form>
+    
         <br><br>
-        Password: <input type="password" name="password">
-        <br><br>
-        <input type="submit" value="Log in">
-    </form>
-
-    <br><br>
-
-    <form action="/register">
-        <input type="submit" value="Register">
-    </form>
-      
+    
+        <form action="/register">
+            <input type="submit" value="Register">
+        </form>
+        </div>
+    
+    </div>
   </body>
 
-</html>
+    </html>
