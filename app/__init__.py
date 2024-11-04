@@ -76,6 +76,43 @@ def logout():
     flash('You have been logged out.', 'success')
     return redirect(url_for('home'))
 
+@app.route('/create', methods=['GET', 'POST'])
+def create_story():
+    if 'username' in session:
+        username = session['username']
+        if request.method == 'POST':
+            title = request.form['title']
+            edit = request.form['edit']
+
+            basedir = os.path.abspath(os.path.dirname(__file__))
+            database_path = os.path.join(basedir, 'db', 'users.db')
+            with sqlite3.connect(database_path) as conn:
+                cur = conn.cursor()
+                
+                user_id = cur.execute("SELECT user_id FROM users WHERE username = ?", (username,)).fetchone()[0]
+
+                cur.execute('''
+                    CREATE TABLE IF NOT EXISTS stories (
+                        story_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        story_title TEXT NOT NULL UNIQUE
+                    );
+                ''')
+
+                result = cur.execute("SELECT story_title from stories")
+                all_stories = [row[0] for row in cur.fetchall()]
+                
+                if title in all_stories:
+                    flash('Choose a different title, there is already a story with the same title!', 'error')
+                else:
+                    cur.execute("INSERT INTO stories (story_title) VALUES(?)", (title,))
+                conn.commit()
+                edit_story(user_id, title, edit)
+                flash('Creation successful! You can now view your story on your homepage!', 'success')
+            return redirect(url_for('home'))
+        return render_template('create_story.html')
+    else:
+        flash('You must be logged in to create a story!', 'error')
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

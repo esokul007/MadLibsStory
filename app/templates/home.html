@@ -11,9 +11,15 @@
   </head>
 
   <body>
-    <h1> Hello, {{ username }} </h1>
+    <h1> Hello, {{ username }}. </h1>
 
-    Homepage
+    <h2> Create story:</h2>
+
+    <form action="/create">
+      <input type="submit" value="Create New Story">
+    </form>
+
+    <br><br>
 
     <form action="/logout">
       <input type="submit" value="Logout">
