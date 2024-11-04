@@ -16,3 +16,6 @@ stanleyH -- 2024-11-3 16:35
 Wrote functions for storing data for stories in database.py, wrote functions to allow users to login and logout
 Updated requirement.txt for most up-to-date packages
 Changed imports for __init__.py
+
+naomiL -- 2024-11-4 12:52
+Routing for home, login, register, and logots; templates
