@@ -36,6 +36,10 @@ def register():
     create_user()
     return render_template('register.html')
 
+@app.route('/login', methods=['GETY', 'POST'])
+def login():
+    login()
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
