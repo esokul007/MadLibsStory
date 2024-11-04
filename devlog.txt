@@ -24,3 +24,7 @@ Templates for above and create story
 jacobL -- 2024-11-4 7:45
 All form actions work correctly now, but create story.
 Started CSS for Log in page. Much work to be done with styling.
+
+
+stanleyH -- 2024-11-4 10:59
+Starting putting together functions in __init__.py, got the signup page to work
