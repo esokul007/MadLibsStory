@@ -127,7 +127,7 @@ def create_edit():
         flash('You must be logged in to edit a story!', 'error')
 
 # @app.route('/login', methods=['GET', 'POST'])
-def login():
+def log_in():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -142,9 +142,10 @@ def login():
     return redirect(url_for('home'))
 
 # @app.route('/logout')
-def logout():
+def log_out():
     session.pop('username', None)
     flash('You have been logged out.', 'success')
+    print(url_for('home'))
     return redirect(url_for('home'))
 
 def validate_login(acc_username, password):

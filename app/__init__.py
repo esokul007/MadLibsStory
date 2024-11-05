@@ -21,10 +21,11 @@ app.secret_key = os.environ.get('SECRET_KEY') or 'optional_default_key'
 # Home route
 @app.route('/')
 def home():
+    log_in()
     if 'username' in session:
         username = session['username']
         # Fetch user data from the database using username
-        letter_freq, user_data, num_games = fetch_user_data(username)
+        # letter_freq, user_data, num_games = fetch_user_data(username)
         # Render a template with user-specific data
         return render_template('home.html', username=username)
     else:
@@ -36,10 +37,16 @@ def register():
     create_user()
     return render_template('register.html')
 
-@app.route('/login', methods=['GETY', 'POST'])
-def login():
-    login()
+@app.route('/login', methods=['GET', 'POST'])
+def logout():
+    log_out()
+    return render_template('login.html')
 
+@app.route('/create', methods=['GET', 'POST'])
+def create_new():
+    create_story()
+    return render_template("create_story.html")
+    
 if __name__ == "__main__":
     app.debug = True
     app.run()
