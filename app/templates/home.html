@@ -43,14 +43,22 @@
     {% endif %}
     </header>
 
+  <div class="topnav">
+  <a class="active" href="#home">Home</a>
+  <a href="/contributions">Contributions</a>
+  <a href="/completed">Completed Story</a>
+</div>
+
     <div class="main-content">
     <div class="create-container">
         <h2> Create story:</h3>
         <div class="button-container">
-            <a href="{{ url_for('create_new') }}" class="create-link"><button type="button" class="create-btn">Create New Story</button></a>
+            <a href="{{ url_for('create_new') }}" class="create-link"><button type="button"
+
+
+class="create-btn">Create New Story</button></a>
         </div>
     </div>
-  
     
         <h2> Stories: </h2>
         {{ content | safe }}

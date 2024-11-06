@@ -188,6 +188,32 @@ background-color: #45a049;
   font-size: 16px; /* Adjust font size if needed */
 }
 
+/* Navigation Bar Styling*/
+.topnav {
+  overflow: hidden;
+  background-color: #BBCCFF;
+}
+
+.topnav a {
+  float: left;
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: rgb(236, 227, 216);
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+
 html {
 font-family: Verdana;
 }
