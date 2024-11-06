@@ -148,16 +148,19 @@ def get_stories():
     conn = get_db_connection()
     cur = conn.cursor()
     result = cur.execute("SELECT story_title, story_id FROM stories").fetchall()
+    
     # Gets the story titles and ids
     all_stories = [row['story_title'] for row in result]
     all_ids = [row['story_id'] for row in result]
     all_story_id_pairs = ((all_stories[i], all_ids[i]) for i in range(len(all_stories)))
+    
     # Checks if user is logged in, will return different info
     if 'username' in session:
         username = session['username']
         user_id = cur.execute("SELECT user_id FROM users WHERE username = ?", (username,)).fetchone()[0]
     else:
         user_id = -1
+        
     # Get all edit history
     result = cur.execute("SELECT user_id, story_id, edit FROM story_edits").fetchall()
     all_user_ids = [row['user_id'] for row in result]
@@ -202,3 +205,17 @@ def add_to_story(story_id):
     else:
         return False
         
+def get_contributors(story_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    result = cur.execute("SELECT user_id FROM story_edits WHERE story_id = ?", (story_id,)).fetchall()
+    all_users = [row['user_id'] for row in result]
+    contributors = []
+    for user in all_users:
+        username = cur.execute("SELECT username FROM users WHERE user_id = ?", (user,)).fetchone()[0]
+        contributors.append(username)
+    conn.close()
+    return contributors
+    
+    
+    

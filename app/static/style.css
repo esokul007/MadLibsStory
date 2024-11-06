@@ -1,193 +1,193 @@
 /* Style flash messages */
 .flash-messages {
-    position: fixed;
-    top: 20px; /* Distance from the top of the window */
-    left: 50%;
-    transform: translateX(-50%); /* Center the messages horizontally */
-    z-index: 1000; /* Ensure the messages appear above other content */
-    width: 90%; /* Adjust width as needed */
-    max-width: 600px; /* Set a max-width for better presentation */
+  position: fixed;
+  top: 20px; /* Distance from the top of the window */
+  left: 50%;
+  transform: translateX(-50%); /* Center the messages horizontally */
+  z-index: 1000; /* Ensure the messages appear above other content */
+  width: 90%; /* Adjust width as needed */
+  max-width: 600px; /* Set a max-width for better presentation */
 }
 
 .flash-message {
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    color: #721c24;
-    opacity: 1; /* Fully visible */
-    transition: opacity 0.5s ease; /* Smooth transition for fading out */
-    animation: fadeOut 2s forwards; /* Apply the fade-out animation */
-}
-
-.flash-message {
-  padding: 10px;
+  padding: 10px 20px;
   margin-bottom: 10px;
+  border-radius: 5px;
+  color: #721c24;
+  opacity: 1; /* Fully visible */
+  transition: opacity 0.5s ease; /* Smooth transition for fading out */
+  animation: fadeOut 2s forwards; /* Apply the fade-out animation */
+}
+
+.flash-message {
+padding: 10px;
+margin-bottom: 10px;
 }
 
 .flash-message.error {
-  background-color: #f8d7da;
-  color: #721c24;
+background-color: #f8d7da;
+color: #721c24;
 }
 
 .flash-message.success {
-  background-color: #d4edda;
-  color: #155724;
+background-color: #d4edda;
+color: #155724;
 }
 
 /* Keyframes for fade-out animation */
 @keyframes fadeOut {
-    0% {
-        opacity: 1; /* Fully visible */
-    }
-    80% {
-        opacity: 1; /* Remain visible until near the end */
-    }
-    100% {
-        opacity: 0; /* Fully transparent */
-    }
+  0% {
+      opacity: 1; /* Fully visible */
+  }
+  80% {
+      opacity: 1; /* Remain visible until near the end */
+  }
+  100% {
+      opacity: 0; /* Fully transparent */
+  }
 }
 
 
 .header {
-    text-align: left;
-  }
+  text-align: left;
+}
 
 /* Container for the form elements */
 .login-form {
-  /* position: fixed; */
-  /* top: 0; */
-  /* right: 0; */
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 200px;
+/* position: fixed; */
+/* top: 0; */
+/* right: 0; */
+padding: 10px;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: 200px;
 }
 
 /* Container for buttons */
 .button-container {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  gap: 10px;
+display: flex;
+width: 100%;
+justify-content: space-between;
+gap: 10px;
 }
 
 /* General style for buttons */
 .login-form button {
-  flex: 1;
-  padding: 8px 16px;
-  border-radius: 20px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 0;
+flex: 1;
+padding: 8px 16px;
+border-radius: 20px;
+color: white;
+border: none;
+cursor: pointer;
+margin-bottom: 0;
 }
 
 /* Specific style for the login button */
 .login-btn {
-  background-color: #007bff;
+background-color: #007bff;
 }
 
 .login-btn:hover {
-  background-color: #0056b3;
+background-color: #0056b3;
 }
 
 /* Specific style for the signup button */
 .signup-btn {
-  background-color: #4CAF50;
+background-color: #4CAF50;
 }
 
 .signup-btn:hover {
-  background-color: #45a049;
+background-color: #45a049;
 }
 
 /* Welcome Container */
 .welcome-container {
-    /* position: fixed; */
-    /* top: 0; */
-    /* right: 0; */
-    /* background-color: #f8f9fa; */
-    padding: 20px;
-    /* border-radius: 15px; */
-    /* border-bottom-left-radius: 15px; */
-    margin: 5px;
-    /* z-index: 1000; */
+  /* position: fixed; */
+  /* top: 0; */
+  /* right: 0; */
+  /* background-color: #f8f9fa; */
+  padding: 20px;
+  /* border-radius: 15px; */
+  /* border-bottom-left-radius: 15px; */
+  margin: 5px;
+  /* z-index: 1000; */
 }
 
 .signout-btn {
-    background-color: #dc3545; 
-    color: white;
-    padding: 5px 10px;
-    text-decoration: none;
-    margin-left: 10px;
-    border-radius: 4px;
+  background-color: #dc3545; 
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-left: 10px;
+  border-radius: 4px;
 }
 
 .signout-btn:hover {
-    background-color: #bd2130;
+  background-color: #bd2130;
 }
 
 /* Create Container */
 .create-container {
-    /* position: fixed; */
-    /* top: 100px;  */
-    /* right: 0; */
-    /* background-color: #f8f9fa; */
-    /* padding: 10px; */
-    /* border-bottom-left-radius: 8px; */
-    /* z-index: 999;  */
+  /* position: fixed; */
+  /* top: 100px;  */
+  /* right: 0; */
+  /* background-color: #f8f9fa; */
+  /* padding: 10px; */
+  /* border-bottom-left-radius: 8px; */
+  /* z-index: 999;  */
 }
 
 /* Button styling for Create button */
 .create-btn {
-    background-color: #4CAF50; 
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
+  background-color: #4CAF50; 
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
 }
 
 .create-btn:hover {
-    background-color: #45a049; 
+  background-color: #45a049; 
 }
 
 /* Button styling for add button */
 .add-btn {
-    background-color: #007bff; 
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
+  background-color: #007bff; 
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
 }
 
 .add-btn:hover {
-    background-color: #0056b3; 
+  background-color: #0056b3; 
 }
 
 html {
-  font-family: Verdana;
+font-family: Verdana;
 }
 
 header {
-  /* background-color: grey; */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px 25px;
+/* background-color: grey; */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+padding: 10px 25px;
 }
 
 .main-content{
-  /* background-color: aliceblue; */
-  margin: 0 5%;
+/* background-color: aliceblue; */
+margin: 0 5%;
 }
 
 html {
-  background-color:rgb(236, 227, 216);
-  color:#362620;
+background-color:rgb(236, 227, 216);
+color:#362620;
 }
 
 input{
-  margin: 5px 0;
+margin: 5px 0;
 }

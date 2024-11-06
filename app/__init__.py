@@ -7,7 +7,7 @@
 
 from flask import Flask, request, render_template, redirect, url_for, flash, session
 import os
-from database import create_user, login_user, logout_user, create_story, create_edit, get_stories, can_add_to_story, add_to_story
+from database import create_user, login_user, logout_user, create_story, create_edit, get_stories, can_add_to_story, add_to_story, get_contributors
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(32)
@@ -99,6 +99,12 @@ def display_stories():
         text += 'border-radius: 15px;'
         text += '">'
         title, story_id = pair
+        contributor_list = get_contributors(story_id)
+        contributors = ""
+        for i in contributor_list:
+            contributors += i + ", "
+        contributors = contributors[:-2]
+        
         if story_id in user_edits:
             story_text = ""
             counter = 1
@@ -114,7 +120,7 @@ def display_stories():
             text += f'<p>{story_text}</p>\n'
         else:
             text += f'<p>Edit {last_edit}: <br>{story_text}</p>\n'
-        text += '\n<br>\n'
+        text += f'<p><b>Contributors:</b> {contributors}</p>'
         text += f'''
         <form action="{url_for('edit')}" method="POST">
             <button type="submit" class="add-btn" name="data-id" value={story_id}>Add to Story</button>
