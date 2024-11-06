@@ -33,3 +33,6 @@ Put everything together, all webpages are functional, can add/create stories now
 
 stanleyH -- 2024-11-6 0:00
 Added contributors and better input textboxes
+
+naomiL -- 2024-11-6 0:29
+Added styling for home, create/edit story, register
