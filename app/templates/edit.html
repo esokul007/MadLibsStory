@@ -6,6 +6,11 @@
   </head>
 
   <body>
+    <header>
+      <h1>Add to story </h1>
+    </header>
+
+    <div class="main-content">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div class="flash-messages">
@@ -28,5 +33,7 @@
             <button type="button" class="add-btn">Return to Home</button>
         </a>
     </form>
+
+    </div>
   </body>
 </html>

@@ -12,6 +12,11 @@
   </head>
 
   <body>
+    <header>
+      <h1>Create New Story</h1>
+    </header>
+
+    <div class="main-content">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div class="flash-messages">
@@ -30,7 +35,7 @@
       <button type="submit" class="create-btn">Create Story</button>
       <a href="{{ url_for('home') }}" class="signup-btn-link"><button type="button" class="create-btn">Return to Home</button></a>
     </form>
-
+</div>
 
   </body>
 
