@@ -54,9 +54,9 @@
 
 /* Container for the form elements */
 .login-form {
-  position: fixed;
-  top: 0;
-  right: 0;
+  /* position: fixed; */
+  /* top: 0; */
+  /* right: 0; */
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -103,13 +103,15 @@
 
 /* Welcome Container */
 .welcome-container {
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #f8f9fa;
-    padding: 10px;
-    border-bottom-left-radius: 8px;
-    z-index: 1000;
+    /* position: fixed; */
+    /* top: 0; */
+    /* right: 0; */
+    /* background-color: #f8f9fa; */
+    padding: 20px;
+    /* border-radius: 15px; */
+    /* border-bottom-left-radius: 15px; */
+    margin: 5px;
+    /* z-index: 1000; */
 }
 
 .signout-btn {
@@ -127,13 +129,13 @@
 
 /* Create Container */
 .create-container {
-    position: fixed;
-    top: 100px; 
-    right: 0;
-    background-color: #f8f9fa;
-    padding: 10px;
-    border-bottom-left-radius: 8px;
-    z-index: 999; 
+    /* position: fixed; */
+    /* top: 100px;  */
+    /* right: 0; */
+    /* background-color: #f8f9fa; */
+    /* padding: 10px; */
+    /* border-bottom-left-radius: 8px; */
+    /* z-index: 999;  */
 }
 
 /* Button styling for Create button */
@@ -162,4 +164,30 @@
 
 .add-btn:hover {
     background-color: #0056b3; 
+}
+
+html {
+  font-family: Verdana;
+}
+
+header {
+  /* background-color: grey; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 25px;
+}
+
+.main-content{
+  /* background-color: aliceblue; */
+  margin: 0 5%;
+}
+
+html {
+  background-color:rgb(236, 227, 216);
+  color:#362620;
+}
+
+input{
+  margin: 5px 0;
 }

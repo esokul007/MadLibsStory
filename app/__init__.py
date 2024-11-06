@@ -91,9 +91,13 @@ def add():
     
 def display_stories():
     pairs, edits, user_edits = get_stories()
-    print(pairs, edits, user_edits)
+    # print(pairs, edits, user_edits)
     text = ''''''
     for pair in pairs:
+        text += '<div style="background-color: #fffbf6;'
+        text += 'padding: 5px 10px 10px 10px;'
+        text += 'border-radius: 15px;'
+        text += '">'
         title, story_id = pair
         if story_id in user_edits:
             story_text = ""
@@ -116,6 +120,7 @@ def display_stories():
             <button type="submit" class="add-btn" name="data-id" value={story_id}>Add to Story</button>
         </form>
         '''
+        text += '</div>'
         text += '\n<br>'
     return text
 

@@ -12,6 +12,8 @@
   </head>
 
   <body>
+    <header>
+      <h1> <i>Stories by Indigo </i></h1>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div class="flash-messages">
@@ -39,15 +41,17 @@
             </form>
         </div>
     {% endif %}
-      
+    </header>
+
+    <div class="main-content">
     <div class="create-container">
-        <h2> Create story:</h2>
+        <h2> Create story:</h3>
         <div class="button-container">
             <a href="{{ url_for('create_new') }}" class="create-link"><button type="button" class="create-btn">Create New Story</button></a>
         </div>
     </div>
-      
-    <div class="main-content">
+  
+    
         <h2> Stories: </h2>
         {{ content | safe }}
     </div>
