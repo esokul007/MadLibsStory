@@ -8,32 +8,51 @@
 <html>
   <head>
     <title> HOME </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
 
   <body>
-    <div class="login-container">
-        <form class="login-form" action="/login" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <div class="button-container">
-                <button type="submit" class="login-btn">Login</button>
-                <a href="{{ url_for('register') }}" class="signup-btn-link"><button type="button" class="signup-btn">Sign Up</button></a>
-            </div>
-        </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% if session['username'] %}
+        <div class="welcome-container">
+            Welcome, {{ session['username'] }}
+            <a href="{{ url_for('logout') }}" class="signout-btn">Sign Out</a>
+        </div>
+    {% else %}
+        <!-- The existing login container -->
+        <div class="login-container">
+            <form class="login-form" action="/login" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <div class="button-container">
+                    <button type="submit" class="login-btn">Login</button>
+                    <a href="{{ url_for('register') }}" class="signup-btn-link"><button type="button" class="signup-btn">Sign Up</button></a>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+      
+    <div class="create-container">
+        <h2> Create story:</h2>
+        <div class="button-container">
+            <a href="{{ url_for('create_new') }}" class="create-link"><button type="button" class="create-btn">Create New Story</button></a>
+        </div>
     </div>
-    <h1> Hello, {{ username }}. </h1>
-
-    <h2> Create story:</h2>
-
-    <form action="/create">
-      <input type="submit" value="Create New Story">
-    </form>
+      
+    <div class="main-content">
+        <h2> Stories: </h2>
+        {{ content | safe }}
+    </div>
 
     <br><br>
-
-    <form action="/login">
-      <input type="submit" value="Logout">
-    </form>
 
   </body>
 

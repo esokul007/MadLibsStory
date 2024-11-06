@@ -3,169 +3,202 @@
 # SoftDev
 # P00: Move Slowly and Fix Things
 # 2024-10-28
-# Time spent: 5
+# Time spent: 7
 
-from flask import Flask, request, jsonify, render_template, redirect, url_for, flash, session
+from flask import request, flash, session
 import sqlite3
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
-import json
 
-# @app.route('/register', methods=['GET', 'POST'])
+# Database path setup
+DB_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'users.db')
+
+# connext to database
+def get_db_connection():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row  # So I can access dictionary items using their column name instead of indexing
+    return conn
+
+# Creates new user in the database
 def create_user():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
-        # Generate a password hash
         password_hash = generate_password_hash(password)
 
-        conn = sqlite3.connect('users.db')
-        cur = conn.cursor()
+        try:
+            conn = get_db_connection()
+            cur = conn.cursor()
+            # Create users table if it doesn't exist
+            cur.execute('''
+                CREATE TABLE IF NOT EXISTS users (
+                    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT NOT NULL UNIQUE,
+                    password_hash TEXT NOT NULL
+                );
+            ''')
+            # Insert new user into the database
+            cur.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)", (username, password_hash))
+            conn.commit()
+            flash('Registration successful!', 'success')
+        except sqlite3.IntegrityError:
+            flash('Username already exists!', 'error')
+        finally:
+            conn.close()
 
-
-        # Create the users table if it doesn't already exist
-        cur.execute('''
-            CREATE TABLE IF NOT EXISTS users (
-                user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT NOT NULL UNIQUE,
-                password_hash TEXT NOT NULL
-            );
-        ''')
-
-        # Insert the username and the hashed password into the database
-        cur.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)", (username, password_hash))
-        conn.commit()
-        conn.close()
-        return redirect(url_for('home'))
-
-def edit_story(user_id, title, edit):
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    database_path = os.path.join(basedir, 'db', 'users.db')
-    with sqlite3.connect(database_path) as conn:
-        cur = conn.cursor()
-
-        result = cur.execute("SELECT story_id FROM stories WHERE story_title = ?", (title,))
-
-        story_id = result.fetchone()[0]
-
-        cur.execute('''
-            CREATE TABLE IF NOT EXISTS story_edits (
-                edit_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INT NOT NULL,
-                story_id INT NOT NULL,
-                edit TEXT NOT NULL
-            );
-        ''')
-
-        cur.execute("INSERT INTO story_edits (user_id, story_id, edit) VALUES (?, ?, ?)", (user_id, story_id, edit))
-        conn.commit()
-
-# @app.route('/create', methods=['GET', 'POST'])
-def create_story():
-    if 'username' in session:
-        username = session['username']
-        if request.method == 'POST':
-            title = request.form['title']
-            edit = request.form['edit']
-
-            basedir = os.path.abspath(os.path.dirname(__file__))
-            database_path = os.path.join(basedir, 'db', 'users.db')
-            with sqlite3.connect(database_path) as conn:
-                cur = conn.cursor()
-
-                user_id = cur.execute("SELECT user_id FROM users WHERE username = ?", (username,)).fetchone()[0]
-
-                cur.execute('''
-                    CREATE TABLE IF NOT EXISTS stories (
-                        story_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        story_title TEXT NOT NULL UNIQUE
-                    );
-                ''')
-
-                result = cur.execute("SELECT story_title from stories")
-                all_stories = [row[0] for row in cur.fetchall()]
-
-                if title in all_stories:
-                    flash('Choose a different title, there is already a story with the same title!', 'error')
-                else:
-                    cur.execute("INSERT INTO stories (story_title) VALUES(?)", (title,))
-                conn.commit()
-                edit_story(user_id, title, edit)
-                flash('Creation successful! You can now view your story on your homepage!', 'success')
-    else:
-        flash('You must be logged in to create a story!', 'error')
-
-# @app.route('/edit', methods=['GET', 'POST'])
-def create_edit():
-    if 'username' in session:
-        username = session['username']
-        if request.method == 'POST':
-            title = request.form['title']
-            edit = request.form['edit']
-
-            basedir = os.path.abspath(os.path.dirname(__file__))
-            database_path = os.path.join(basedir, 'db', 'users.db')
-            with sqlite3.connect(database_path) as conn:
-                cur = conn.cursor()
-                result = cur.execute("SELECT user_id from users WHERE username = ?", (username))
-                user_id = result.fetchone()[0]
-
-                result = cur.execute("SELECT story_id from story_edits WHERE user_id = ?", (user_id))
-                user_edit_story_ids = [row[0] for row in cur.fetchall()]
-
-                for story_id in user_edit_story_ids:
-                    result = cur.execute("SELECT story_title from stories WHERE story_id = ?", (story_id))
-                    story_title = result.fetchone()[0]
-                    if story_title == title:
-                        flash('You have already edited this story!', 'error')
-                        return redirect(url_for('home'))
-
-                edit_story(user_id, title, edit)
-                flash('Edit succesful! You can now view the full story!', 'success')
-    else:
-        flash('You must be logged in to edit a story!', 'error')
-
-# @app.route('/login', methods=['GET', 'POST'])
-def log_in():
+# Logs in user if username and password match
+def login_user():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        # Retrieve hashed password for the given username
+        cur.execute("SELECT password_hash FROM users WHERE username = ?", (username,))
+        user_password_hash = cur.fetchone()
+        conn.close()
 
-        # Function to check if username and password match:
-        if validate_login(username, password):
+        if user_password_hash and check_password_hash(user_password_hash['password_hash'], password):
             session['username'] = username
             flash('Login successful!', 'success')
-            user_data = fetch_user_data(username)
-            return redirect(url_for('home'))
+        else:
+            flash('Invalid username or password!', 'error')
 
-    return redirect(url_for('home'))
-
-# @app.route('/logout')
-def log_out():
+# Logs out user
+def logout_user():
     session.pop('username', None)
     flash('You have been logged out.', 'success')
-    print(url_for('home'))
-    return redirect(url_for('home'))
 
-def validate_login(acc_username, password):
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    database_path = os.path.join(basedir, 'db', 'users.db')
-    conn = sqlite3.connect(database_path)
+#  Create a new story if the user is logged in
+def create_story():
+    if 'username' in session:
+        username = session['username']
+        title = request.form['title']
+        edit = request.form['edit']
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        # Retrieve the user ID for the current session's username
+        user_id = cur.execute("SELECT user_id FROM users WHERE username = ?", (username,)).fetchone()[0]
+        
+        # Create stories table if it doesn't exist
+        cur.execute('''
+            CREATE TABLE IF NOT EXISTS stories (
+                story_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                story_title TEXT NOT NULL UNIQUE
+            );
+        ''')
+
+        # Check if the story title already exists
+        result = cur.execute("SELECT story_title FROM stories").fetchall()
+        all_stories = [row['story_title'] for row in result]
+
+        if title in all_stories:
+            flash('Choose a different title, a story with this title already exists!', 'error')
+            return False
+        else:
+            # Insert new story and commit changes
+            cur.execute("INSERT INTO stories (story_title) VALUES(?)", (title,))
+            conn.commit()
+            create_edit(user_id, title, edit)
+            flash('Story creation successful!', 'success')
+        conn.close()
+        return True
+    else:
+        flash('You must be logged in to create a story!', 'error')
+
+# Create a new edit for a story
+def create_edit(user_id, title, edit):
+    conn = get_db_connection()
     cur = conn.cursor()
 
-    # Use parameterized query to prevent SQL injection
-    cur.execute("SELECT password_hash FROM users WHERE username = ?", (acc_username,))
-    user_password_hash = cur.fetchone()  # Fetches the first row of the query result
+    # Retrieve story ID for the given title
+    story_id = cur.execute("SELECT story_id FROM stories WHERE story_title = ?", (title,)).fetchone()[0]
+
+    # Create story_edits table if it doesn't exist
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS story_edits (
+            edit_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            story_id INTEGER NOT NULL,
+            edit TEXT NOT NULL
+        );
+    ''')
+    # Insert the new edit
+    cur.execute("INSERT INTO story_edits (user_id, story_id, edit) VALUES (?, ?, ?)", (user_id, story_id, edit))
+    conn.commit()
     conn.close()
 
-    if user_password_hash:
-        # Check if the password hash matches the hash of the entered password
-        if check_password_hash(user_password_hash[0], password):
-            return True
-        else:
-            flash('The password you entered is incorrect!', 'error')
-            return False
+# Validate the user's login credentials
+def validate_login(username, password):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    # Retrieve the hashed password from the database
+    cur.execute("SELECT password_hash FROM users WHERE username = ?", (username,))
+    user_password_hash = cur.fetchone()
+    conn.close()
+
+    if user_password_hash and check_password_hash(user_password_hash['password_hash'], password):
+        return True
     else:
-        flash('Invalid username!', 'error')
         return False
+
+def get_stories():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    result = cur.execute("SELECT story_title, story_id FROM stories").fetchall()
+    # Gets the story titles and ids
+    all_stories = [row['story_title'] for row in result]
+    all_ids = [row['story_id'] for row in result]
+    all_story_id_pairs = ((all_stories[i], all_ids[i]) for i in range(len(all_stories)))
+    # Checks if user is logged in, will return different info
+    if 'username' in session:
+        username = session['username']
+        user_id = cur.execute("SELECT user_id FROM users WHERE username = ?", (username,)).fetchone()[0]
+    else:
+        user_id = -1
+    # Get all edit history
+    result = cur.execute("SELECT user_id, story_id, edit FROM story_edits").fetchall()
+    all_user_ids = [row['user_id'] for row in result]
+    all_story_ids = [row['story_id'] for row in result]
+    all_edits = [row['edit'] for row in result]
+    story_edits = {}
+    user_edited_stories = []
+    for i in range(len(all_edits)):
+        if all_story_ids[i] not in story_edits:
+            story_edits[all_story_ids[i]] = []
+        story_edits[all_story_ids[i]].append(all_edits[i])
+        if all_user_ids[i] == user_id:
+            user_edited_stories.append(all_story_ids[i])
+    conn.close()
+    return all_story_id_pairs, story_edits, user_edited_stories
+        
+def can_add_to_story(story_id):
+    if 'username' in session:
+        username = session['username']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        user_id = cur.execute("SELECT user_id FROM users WHERE username = ?", (username,)).fetchone()[0]
+        result = cur.execute("SELECT user_id FROM story_edits WHERE story_id = ?", (story_id,)).fetchall()
+        all_user_edit_ids = [row['user_id'] for row in result]
+        conn.close()
+        if user_id in all_user_edit_ids:
+            return False
+        return True
+
+def add_to_story(story_id):
+    edit = request.form['edit']
+    if can_add_to_story(story_id):
+        conn = get_db_connection()
+        cur = conn.cursor()
+        if 'username' in session:
+            username = session['username']
+            user_id = cur.execute("SELECT user_id FROM users WHERE username = ?", (username,)).fetchone()[0]
+        story_title = cur.execute("SELECT story_title FROM stories WHERE story_id = ?", (story_id,)).fetchone()[0]
+        create_edit(user_id, story_title, edit)
+        conn.close()
+        return True
+    else:
+        return False
+        

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ADD_TO_STORY</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Form to add edits to the story -->
+    <form action="/add" method="POST">
+        <!-- Hidden input to store story_id if needed -->
+        <input type="hidden" name="story_id" value="{{ session.get('story_id') }}">
+        Edit: <input type="text" name="edit" placeholder="Add to story" required>
+        <br><br>
+        <button type="submit" class="add-btn">Add</button>
+        <a href="{{ url_for('home') }}" class="signup-btn-link">
+            <button type="button" class="add-btn">Return to Home</button>
+        </a>
+    </form>
+  </body>
+</html>

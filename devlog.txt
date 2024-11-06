@@ -25,6 +25,8 @@ jacobL -- 2024-11-4 7:45
 All form actions work correctly now, but create story.
 Started CSS for Log in page. Much work to be done with styling.
 
-
 stanleyH -- 2024-11-4 10:59
 Starting putting together functions in __init__.py, got the signup page to work
+
+stanleyH -- 2024-11-5 22:09
+Put everything together, all webpages are functional, can add/create stories now with error messages if req not met

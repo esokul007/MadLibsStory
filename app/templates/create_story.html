@@ -8,15 +8,26 @@
 <html>
   <head>
     <title> CREATE_STORY </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
 
   <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     <form action="/create" method="POST">
-      Title: <input type="text" name = "title"> 
+      Title: <input type="text" name="title" placeholder="Title" required>
       <br><br>
-      Story: <input type="text" name = "edit"> 
+      Story: <input type="password" name="edit" placeholder="Story" required>
       <br><br>
-      <input type="submit" value="Submit">
+      <button type="submit" class="create-btn">Create Story</button>
+      <a href="{{ url_for('home') }}" class="signup-btn-link"><button type="button" class="create-btn">Return to Home</button></a>
     </form>
 
 
