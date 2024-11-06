@@ -20,7 +20,8 @@
     <form action="/add" method="POST">
         <!-- Hidden input to store story_id if needed -->
         <input type="hidden" name="story_id" value="{{ session.get('story_id') }}">
-        Edit: <input type="text" name="edit" placeholder="Add to story" required>
+        <label for="edit" style="display: block; margin-bottom: 5px;">Edit:</label>
+        <textarea id="edit" name="edit" placeholder="Add to story" required style="width: 100%; height: auto; min-height: 40px; max-width: 500px; padding: 8px;"></textarea>
         <br><br>
         <button type="submit" class="add-btn">Add</button>
         <a href="{{ url_for('home') }}" class="signup-btn-link">
