@@ -6,37 +6,40 @@
   date: last edited
  -->
 <html>
-  <head>
-    <title> CREATE_STORY </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  </head>
+    <head>
+        <title> CREATE_STORY </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
 
-  <body>
-    <header>
-      <h1>Create New Story</h1>
-    </header>
+    <body>
+        <header>
+            <h1>Create New Story</h1>
+        </header>
 
-    <div class="main-content">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="flash-messages">
-          {% for category, message in messages %}
-            <div class="flash-message {{ category }}">{{ message }}</div>
-          {% endfor %}
+        <div class="main-content">
+            <!-- flashing messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <!-- Form to create story -->
+            <form action="/create" method="POST">
+                Title: <input type="text" name="title" placeholder="Title" required>
+                <br><br>
+                <label for="edit" style="display: block; margin-bottom: 5px;">Edit:</label>
+                <textarea id="edit" name="edit" placeholder="Story" required style="width: 100%; min-height: 100px; max-width: 500px; padding: 8px;"></textarea>
+                <br><br>
+                <button type="submit" class="create-btn">Create Story</button>
+                <a href="{{ url_for('home') }}" class="signup-btn-link"><button type="button" class="create-btn">Return to Home</button></a>
+            </form>
         </div>
-      {% endif %}
-    {% endwith %}
-    <form action="/create" method="POST">
-      Title: <input type="text" name="title" placeholder="Title" required>
-      <br><br>
-      <label for="edit" style="display: block; margin-bottom: 5px;">Edit:</label>
-      <textarea id="edit" name="edit" placeholder="Story" required style="width: 100%; min-height: 100px; max-width: 500px; padding: 8px;"></textarea>
-      <br><br>
-      <button type="submit" class="create-btn">Create Story</button>
-      <a href="{{ url_for('home') }}" class="signup-btn-link"><button type="button" class="create-btn">Return to Home</button></a>
-    </form>
-</div>
 
-  </body>
+    </body>
 
 </html>

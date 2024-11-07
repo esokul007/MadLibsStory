@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ADD_TO_STORY</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  </head>
+    <head>
+        <title>ADD_TO_STORY</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
 
-  <body>
-    <header>
-      <h1>Add to story </h1>
-    </header>
+    <body>
+        <header>
+            <h1>Add to story </h1>
+        </header>
 
-    <div class="main-content">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="flash-messages">
-          {% for category, message in messages %}
-            <div class="flash-message {{ category }}">{{ message }}</div>
-          {% endfor %}
+        <div class="main-content">
+        <!-- flashing messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-messages">
+              {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <!-- Form to add edits to the story -->
+        <form action="/add" method="POST">
+            
+            <!-- Hidden input to store story_id -->
+            <input type="hidden" name="story_id" value="{{ session.get('story_id') }}">
+            
+            <!-- Previous contribution preview they can base their edits off -->
+            <b>Previous Edit</b>
+            <p>{{ previous_edit | safe}} </p>
+            <br>
+            
+            <!-- Input for edits -->
+            <b><label for="edit" style="display: block; margin-bottom: 5px;">Edit:</label></b>
+            <textarea id="edit" name="edit" placeholder="Add to story" required style="width: 100%; height: auto; min-height: 40px; max-width: 500px; padding: 8px;"></textarea>
+            <br><br>
+            <button type="submit" class="add-btn">Add</button>
+            <a href="{{ url_for('home') }}" class="signup-btn-link">
+                <button type="button" class="add-btn">Return to Home</button>
+            </a>
+            <br><br>
+            
+            <!-- Toggle button for complete story -->
+            <div class="toggle-container">
+                <label for="toggleComplete">Complete Story:</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggleComplete" name="toggleComplete" value="on">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </form>
         </div>
-      {% endif %}
-    {% endwith %}
-
-    <!-- Form to add edits to the story -->
-    <form action="/add" method="POST">
-        <!-- Hidden input to store story_id if needed -->
-        <input type="hidden" name="story_id" value="{{ session.get('story_id') }}">
-        <label for="edit" style="display: block; margin-bottom: 5px;">Edit:</label>
-        <textarea id="edit" name="edit" placeholder="Add to story" required style="width: 100%; height: auto; min-height: 40px; max-width: 500px; padding: 8px;"></textarea>
-        <br><br>
-        <button type="submit" class="add-btn">Add</button>
-        <a href="{{ url_for('home') }}" class="signup-btn-link">
-            <button type="button" class="add-btn">Return to Home</button>
-        </a>
-    </form>
-
-    </div>
-  </body>
+    </body>
 </html>

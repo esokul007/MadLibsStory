@@ -36,3 +36,6 @@ Added contributors and better input textboxes
 
 naomiL -- 2024-11-6 0:29
 Added styling for home, create/edit story, register
+
+stanleyH -- 2024-11-7 1:49
+Created all other main pages, linked them, added toggle button to complete stories, added different displays, commented code and formatted nicely, fixed some bugs, link everything together, fixed some styling
