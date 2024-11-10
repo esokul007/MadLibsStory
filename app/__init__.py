@@ -9,10 +9,13 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, session
 import os
 from database import create_user, login_user, logout_user, create_story, create_edit, get_stories, can_add_to_story, add_to_story, get_contributors
+import subprocess
+import auto
 
 # Auto-generated secret key
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(32)
+
 
 # Login route
 @app.route('/login', methods=['GET', 'POST'])
@@ -203,9 +206,16 @@ def completed():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        with open('tracker.txt', 'a') as file:
+            file.write('\n1')
+            print("Text has been added to the file.")
+            auto.commit_and_push()
         create_user()
         return redirect(url_for('home'))
     return render_template('register.html')
 
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+    
